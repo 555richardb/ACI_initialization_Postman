@@ -1,0 +1,1517 @@
+{
+	"info": {
+		"_postman_id": "b5ca084a-082f-44df-8b69-f74ffc6a3bdd",
+		"name": "ACI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fabric Init",
+			"item": [
+				{
+					"name": "FABRIC - Switch Addition",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}    \r\n    \"fabricNodeIdentP\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/controller/nodeidentpol/nodep-{{NODE_SN}}\",\r\n            \"serial\": \"{{NODE_SN}}\",\r\n            \"nodeId\": \"{{NODE_ID}}\",\r\n            \"name\": \"{{NODE_NAME}}\",\r\n            \"role\": \"{{NODE_ROLE}}\",\r\n            \"rn\": \"nodep-{{NODE_SN}}\",\r\n            \"status\": \"created\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/controller/nodeidentpol/nodep-{{NODE_SN}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"controller",
+								"nodeidentpol",
+								"nodep-{{NODE_SN}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - VPC protection group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fabricExplicitGEp\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/protpol/expgep-{{VPC_PROT_GROUP}}\",\r\n            \"id\": \"{{LEAF_NODE_ID}}\",\r\n            \"name\": \"{{VPC_PROT_GROUP}}\",\r\n            \"rn\": \"expgep-{{VPC_PROT_GROUP}}\",\r\n            \"status\": \"created\"\r\n        },\r\n        \"children\": [\r\n            {\r\n                \"fabricNodePEp\": {\r\n                    \"attributes\": {\r\n                        \"dn\": \"uni/fabric/protpol/expgep-{{VPC_PROT_GROUP}}/nodepep-{{LEAF_NODE_1}}\",\r\n                        \"id\": \"{{LEAF_NODE_1}}\",\r\n                        \"status\": \"created\",\r\n                        \"rn\": \"nodepep-{{LEAF_NODE_1}}\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            },\r\n            {\r\n                \"fabricNodePEp\": {\r\n                    \"attributes\": {\r\n                        \"dn\": \"uni/fabric/protpol/expgep-{{VPC_PROT_GROUP}}/nodepep-{{LEAF_NODE_2}}\",\r\n                        \"id\": \"{{LEAF_NODE_2}}\",\r\n                        \"status\": \"created\",\r\n                        \"rn\": \"nodepep-{{LEAF_NODE_2}}\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            },\r\n            {\r\n                \"fabricRsVpcInstPol\": {\r\n                    \"attributes\": {\r\n                        \"tnVpcInstPolName\": \"default\",\r\n                        \"status\": \"created,modified\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/protpol/expgep-{{VPC_PROT_GROUP}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"protpol",
+								"expgep-{{VPC_PROT_GROUP}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACCESS - Leaf Interface Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"infraAccPortP\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/infra/accportprof-{{LIP_NAME}}\",\r\n            \"name\": \"{{LIP_NAME}}\",\r\n            \"rn\": \"accportprof-{{LIP_NAME}}\",\r\n            \"status\": \"created,modified\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/accportprof-{{LIP_NAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"accportprof-{{LIP_NAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACCESS - Switch Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"infraNodeP\": {\n        \"attributes\": {\n            \"dn\": \"uni/infra/nprof-{{SW_PROF_NAME}}\",\n            \"name\": \"{{SW_PROF_NAME}}\",\n            \"rn\": \"nprof-{{SW_PROF_NAME}}\",\n            \"status\": \"created\"\n        },\n        \"children\": [\n            {\n                \"infraLeafS\": {\n                    \"attributes\": {\n                        \"dn\": \"uni/infra/nprof-{{SW_PROF_NAME}}/leaves-{{LEAF_SEL_NAME}}-typ-range\",\n                        \"type\": \"range\",\n                        \"name\": \"{{LEAF_SEL_NAME}}\",\n                        \"rn\": \"leaves-{{LEAF_SEL_NAME}}-typ-range\",\n                        \"status\": \"created\"\n                    },\n                    \"children\": [\n                        {\n                            \"infraNodeBlk\": {\n                                \"attributes\": {\n                                    \"dn\": \"uni/infra/nprof-{{SW_PROF_NAME}}/leaves-{{LEAF_SEL_NAME}}-typ-range/nodeblk-{{NPSB}}\",\n                                    \"from_\": \"{{LEAF_NODE_1}}\",\n                                    \"to_\": \"{{LEAF_NODE_2}}\",\n                                    \"name\": \"{{NPSB}}\",\n                                    \"rn\": \"nodeblk-{{NPSB}}\",\n                                    \"status\": \"created\"\n                                },\n                               \"children\": []\n                            }\n                        }\n                    ]\n                }\n            }, {\n                \"infraRsAccPortP\": {\n                    \"attributes\": {\n                        \"tDn\": \"uni/infra/accportprof-{{LIP_NAME}}\",\n                        \"status\": \"created,modified\"\n                    },\n                    \"children\": []\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/nprof-{{SW_PROF_NAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"nprof-{{SW_PROF_NAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACCEESS - VLAN pool",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fvnsVlanInstP\":{\"attributes\":{\"dn\":\"uni/infra/vlanns-[{{VPOOL}}]-{{VPOOLMODE}}\",\"descr\":\"{{VPOOLDESC}}\",\"name\":\"{{VPOOL}}\",\"allocMode\":\"{{VPOOLMODE}}\",\"rn\":\"vlanns-[{{VPOOL}}]-{{VPOOLMODE}}\",\"status\":\"created\"},\"children\":[]}}\n"
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/vlanns-[{{VPOOL}}]-{{VPOOLMODE}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"vlanns-[{{VPOOL}}]-{{VPOOLMODE}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACCESS - VLAN ID group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fvnsEncapBlk\":{\"attributes\":{\"dn\":\"uni/infra/vlanns-[{{VPOOL}}]-{{VPOOLMODE}}/from-[vlan-{{VLANFROM}}]-to-[vlan-{{VLANTO}}]\",\"allocMode\":\"{{VPOOLMODE}}\",\"from\":\"vlan-{{VLANFROM}}\",\"to\":\"vlan-{{VLANTO}}\",\"rn\":\"from-[vlan-{{VLANFROM}}]-to-[vlan-{{VLANTO}}]\",\"status\":\"created\"},\"children\":[]}}\n"
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/vlanns-[{{VPOOL}}]-{{VPOOLMODE}}/from-[vlan-{{VLANFROM}}]-to-[vlan-{{VLANTO}}].json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"vlanns-[{{VPOOL}}]-{{VPOOLMODE}}",
+								"from-[vlan-{{VLANFROM}}]-to-[vlan-{{VLANTO}}].json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACCESS - PHY/L3/VMM/DOMAIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{DOMTYPE2}}\":{\"attributes\":{\"dn\":\"uni/{{DOMTYPE}}-{{DOMNAME}}\",\"name\":\"{{DOMNAME}}\",\"rn\":\"{{DOMTYPE}}-{{DOMNAME}}\",\"status\":\"created\"},\"children\":[{\"infraRsVlanNs\":{\"attributes\":{\"tDn\":\"uni/infra/vlanns-[{{VPOOL}}]-{{VPOOLMODE}}\",\"status\":\"created\"},\"children\":[]}}]}}\n\n\n"
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/{{DOMTYPE}}-{{DOMNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"{{DOMTYPE}}-{{DOMNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACCESS - AAEP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"infraInfra\": {\n        \"attributes\": {\n            \"dn\": \"uni/infra\",\n            \"status\": \"modified\"\n        },\n        \"children\": [\n            {\n                \"infraAttEntityP\": {\n                    \"attributes\": {\n                        \"dn\": \"uni/infra/attentp-{{AAEP}}\",\n                        \"name\": \"{{AAEP}}\",\n                        \"rn\": \"attentp-{{AAEP}}\",\n                        \"status\": \"created\"\n                    },\n                    \"children\": [\n                        {\n                            \"infraRsDomP\": {\n                                \"attributes\": {\n                                    \"tDn\": \"uni/{{DOMTYPE}}-{{DOMNAME}}\",\n                                    \"status\": \"created\"\n                                },\n                                \"children\": []\n                            }\n                        }\n                    ]\n                }\n            },\n            {\n                \"infraFuncP\": {\n                    \"attributes\": {\n                        \"dn\": \"uni/infra/funcprof\",\n                        \"status\": \"modified\"\n                    },\n                    \"children\": []\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IP CDP/MCP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{CDPMCPIPTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/{{CDPMCPIPTYPE}}-{{CDPMCPIPNAME}}\",\"name\":\"{{CDPMCPIPNAME}}\",\"adminSt\":\"{{CDPMCPIPSTATE1}}\",\"rn\":\"{{CDPMCPIPTYPE}}-{{CDPMCPIPNAME}}\",\"status\":\"created\"},\"children\":[]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/{{CDPMCPIPTYPE}}-{{CDPMCPIPNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"{{CDPMCPIPTYPE}}-{{CDPMCPIPNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IP LLDP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{LLDPIPTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/{{LLDPIPTYPE}}-{{LLDPIPNAME}}\",\"name\":\"{{LLDPIPNAME}}\",\"adminRxSt\":\"{{LLDPIPSTATE1}}\",\"adminTxSt\":\"{{LLDPIPSTATE2}}\",\"rn\":\"{{LLDPIPTYPE}}-{{LLDPIPNAME}}\",\"status\":\"created\"},\"children\":[]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/{{LLDPIPTYPE}}-{{LLDPIPNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"{{LLDPIPTYPE}}-{{LLDPIPNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IP LACP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{LACPIPTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/{{LACPIPTYPE}}-{{LACPIPNAME}}\",\"name\":\"{{LACPIPNAME}}\", \"mode\":\"{{LACPIPSTATE1}}\",\"rn\":\"{{LACPIPTYPE}}-{{LACPIPNAME}}\",\"status\":\"created\"},\"children\":[]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/{{LACPIPTYPE}}-{{LACPIPNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"{{LACPIPTYPE}}-{{LACPIPNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IP STP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{STPIPTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/{{STPIPTYPE}}-{{STPIPNAME}}\",\"name\":\"{{STPIPNAME}}\", \"ctrl\":\"{{STPIPSTATE1}}\",\"rn\":\"{{STPIPTYPE}}-{{STPIPNAME}}\",\"status\":\"created\"},\"children\":[]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/{{STPIPTYPE}}-{{STPIPNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"{{STPIPTYPE}}-{{STPIPNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IP LINK LP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{LLPIPTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/{{LLPIPTYPE}}-{{LLPIPNAME}}\",\"name\":\"{{LLPIPNAME}}\", \"autoNeg\":\"{{LLPIPSTATE1}}\",\"speed\":\"{{LLPIPSTATE2}}\",\"rn\":\"{{LLPIPTYPE}}-{{LLPIPNAME}}\",\"status\":\"created\"},\"children\":[]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/{{LLPIPTYPE}}-{{LLPIPNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"{{LLPIPTYPE}}-{{LLPIPNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IPG ACC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{IPGTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/funcprof/{{IPGTYPE}}-{{IPGNAME}}\",\"name\":\"{{IPGNAME}}\",\"rn\":\"{{IPGTYPE}}-{{IPGNAME}}\",\"status\":\"created\"},\"children\":[{\"infraRsHIfPol\":{\"attributes\":{\"tnFabricHIfPolName\":\"{{IPLINK}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsAttEntP\":{\"attributes\":{\"tDn\":\"uni/infra/attentp-{{IPAAEP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsCdpIfPol\":{\"attributes\":{\"tnCdpIfPolName\":\"{{IPCDP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsMcpIfPol\":{\"attributes\":{\"tnMcpIfPolName\":\"{{IPMCP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsLldpIfPol\":{\"attributes\":{\"tnLldpIfPolName\":\"{{IPLLDP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsStpIfPol\":{\"attributes\":{\"tnStpIfPolName\":\"{{IPSTP}}\",\"status\":\"created,modified\"},\"children\":[]}}]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/funcprof/{{IPGTYPE}}-{{IPGNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"funcprof",
+								"{{IPGTYPE}}-{{IPGNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IPG VPC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{IPGTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/funcprof/{{IPGTYPE}}-{{IPGNAME}}\",\"lagT\":\"node\",\"name\":\"{{IPGNAME}}\",\"rn\":\"{{IPGTYPE}}-{{IPGNAME}}\",\"status\":\"created\"},\"children\":[{\"infraRsHIfPol\":{\"attributes\":{\"tnFabricHIfPolName\":\"{{IPLINK}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsAttEntP\":{\"attributes\":{\"tDn\":\"uni/infra/attentp-{{IPAAEP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsLacpPol\":{\"attributes\":{\"tnLacpLagPolName\":\"{{IPLACP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsCdpIfPol\":{\"attributes\":{\"tnCdpIfPolName\":\"{{IPCDP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsMcpIfPol\":{\"attributes\":{\"tnMcpIfPolName\":\"{{IPMCP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsLldpIfPol\":{\"attributes\":{\"tnLldpIfPolName\":\"{{IPLLDP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsStpIfPol\":{\"attributes\":{\"tnStpIfPolName\":\"{{IPSTP}}\",\"status\":\"created,modified\"},\"children\":[]}}]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/funcprof/{{IPGTYPE}}-{{IPGNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"funcprof",
+								"{{IPGTYPE}}-{{IPGNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - IPG PC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"{{IPGTYPE2}}\":{\"attributes\":{\"dn\":\"uni/infra/funcprof/{{IPGTYPE}}-{{IPGNAME}}\",\"name\":\"{{IPGNAME}}\",\"rn\":\"{{IPGTYPE}}-{{IPGNAME}}\",\"status\":\"created\"},\"children\":[{\"infraRsHIfPol\":{\"attributes\":{\"tnFabricHIfPolName\":\"{{IPLINK}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsAttEntP\":{\"attributes\":{\"tDn\":\"uni/infra/attentp-{{IPAAEP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsLacpPol\":{\"attributes\":{\"tnLacpLagPolName\":\"{{IPLACP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsCdpIfPol\":{\"attributes\":{\"tnCdpIfPolName\":\"{{IPCDP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsMcpIfPol\":{\"attributes\":{\"tnMcpIfPolName\":\"{{IPMCP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsLldpIfPol\":{\"attributes\":{\"tnLldpIfPolName\":\"{{IPLLDP}}\",\"status\":\"created,modified\"},\"children\":[]}},{\"infraRsStpIfPol\":{\"attributes\":{\"tnStpIfPolName\":\"{{IPSTP}}\",\"status\":\"created,modified\"},\"children\":[]}}]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/funcprof/{{IPGTYPE}}-{{IPGNAME}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"funcprof",
+								"{{IPGTYPE}}-{{IPGNAME}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HTTP redirect - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commHttp\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/comm-default/http\",\r\n            \"redirectSt\": \"enabled\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/comm-default/http.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"comm-default",
+								"http.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - Inerface Selector under LIP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"infraHPortS\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/infra/accportprof-{{LIP_NAME}}/hports-{{IF_SEL_NAME}}-typ-range\",\r\n            \"name\": \"{{IF_SEL_NAME}}\",\r\n            \"descr\":\"{{IF_SEL_DESC}}\",\r\n            \"rn\": \"hports-{{IF_SEL_NAME}}-typ-range\",\r\n            \"status\": \"created,modified\"\r\n        },\r\n        \"children\": [\r\n            {\r\n                \"infraPortBlk\": {\r\n                    \"attributes\": {\r\n                        \"dn\": \"uni/infra/accportprof-{{LIP_NAME}}/hports-{{IF_SEL_NAME}}-typ-range/portblk-block2\",\r\n                        \"fromPort\": \"{{IS_PORT_A}}\",\r\n                        \"toPort\": \"{{IS_PORT_B}}\",\r\n                        \"name\": \"block2\",\r\n                        \"rn\": \"portblk-block2\",\r\n                        \"status\": \"created,modified\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            },\r\n            {\r\n                \"infraRsAccBaseGrp\": {\r\n                    \"attributes\": {\r\n                        \"tDn\": \"uni/infra/funcprof/accportgrp-{{IPG_NAME}}\",\r\n                        \"status\": \"created,modified\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra/accportprof-{{LIP_NAME}}/hports-{{IF_SEL_NAME}}-typ-range.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra",
+								"accportprof-{{LIP_NAME}}",
+								"hports-{{IF_SEL_NAME}}-typ-range.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NTP server - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"datetimeNtpProv\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/time-default/ntpprov-{{NTP_SRV}}\",\r\n            \"name\": \"{{NTP_SRV}}\",\r\n            \"preferred\": \"{{NTP_PREF}}\",\r\n            \"rn\": \"ntpprov-{{NTP_SRV}}\",\r\n            \"status\": \"created\"\r\n        },\r\n        \"children\": [\r\n            {\r\n                \"datetimeRsNtpProvToEpg\": {\r\n                    \"attributes\": {\r\n                        \"tDn\": \"uni/tn-mgmt/mgmtp-default/oob-default\",\r\n                        \"status\": \"created\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/time-default/ntpprov-{{NTP_SRV}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"time-default",
+								"ntpprov-{{NTP_SRV}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Date and time - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"datetimeFormat\": {\r\n    \"attributes\": {\r\n        \"dn\": \"uni/fabric/format-default\",\r\n        \"tz\": \"n240_America-Indiana-Indianapolis\"\r\n    },\r\n    \"children\": []\r\n}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/format-default.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"format-default.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DNS OOB - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dnsRsProfileToEpg\": {\r\n        \"attributes\": {\r\n            \"tDn\": \"uni/tn-mgmt/mgmtp-default/oob-default\",\r\n            \"status\": \"created\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/dnsp-default/rsProfileToEpg.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"dnsp-default",
+								"rsProfileToEpg.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DNS server - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dnsProv\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/dnsp-default/prov-[{{DNS_SRV}}]\",\r\n            \"addr\": \"{{DNS_SRV}}\",\r\n            \"status\": \"created\",\r\n            \"preferred\": \"{{DNS_PREF}}\",\r\n            \"rn\": \"prov-[{{DNS_SRV}}]\"\r\n        },\r\n        \"children\": [    ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/dnsp-default/prov-[{{DNS_SRV}}].json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"dnsp-default",
+								"prov-[{{DNS_SRV}}].json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DNS domain - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dnsDomain\": {\r\n            \"attributes\": {\r\n                \"dn\": \"uni/fabric/dnsp-default/dom-{{DNS_DOMAIN}}\",\r\n                \"name\": \"{{DNS_DOMAIN}}\",\r\n                \"status\": \"created\",\r\n                \"isDefault\": \"{{DOM_DEFAULT}}\",\r\n                \"rn\": \"dom-{{DNS_DOMAIN}}\"\r\n            },\r\n            \"children\": []\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/dnsp-default/dom-{{DNS_DOMAIN}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"dnsp-default",
+								"dom-{{DNS_DOMAIN}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Internal BGP AS - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bgpAsP\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/bgpInstP-default/as\",\r\n            \"rn\": \"as\",\r\n            \"asn\": \"{{AS_NUM}}\",\r\n            \"status\": \"created\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/bgpInstP-default/as.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"bgpInstP-default",
+								"as.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Route Reflector - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "            {\r\n                \"bgpRRNodePEp\": {\r\n                    \"attributes\": {\r\n                        \"dn\": \"uni/fabric/bgpInstP-default/rr/node-{{RR_NODE}}\",\r\n                        \"rn\": \"node-{{RR_NODE}}\",\r\n                        \"status\": \"created\",\r\n                        \"id\": \"{{RR_NODE}}\"\r\n                    },\r\n                    \"children\": []\r\n                }\r\n            }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/bgpInstP-default/rr/node-{{RR_NODE}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"bgpInstP-default",
+								"rr",
+								"node-{{RR_NODE}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - Best practises 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fabricInst\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric\"\r\n        },\r\n        \"children\": [\r\n\t\t\t{\r\n\t\t\t\t\"coopPol\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/fabric/pol-default\",\r\n\t\t\t\t\t\t\"rn\": \"pol-default\",\r\n\t\t\t\t\t\t\"type\": \"strict\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"fabricNodeControl\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/fabric/nodecontrol-default\",\r\n\t\t\t\t\t\t\"control\": \"1\",\r\n\t\t\t\t\t\t\"descr\": \".\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n            {\r\n                \"isisDomPol\": {\r\n                    \"attributes\": {\r\n                        \"dn\": \"uni/fabric/isisDomP-default\",\r\n                        \"rn\": \"isisDomP-default\",\r\n                        \"redistribMetric\": \"63\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"l3IfPol\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/fabric/l3IfP-default\",\r\n\t\t\t\t\t\t\"bfdIsis\": \"enabled\",\r\n\t\t\t\t\t\t\"descr\": \"enabled\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FABRIC - Best practises 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"infraInfra\": {\r\n\t\t\"attributes\": {\r\n\t\t\t\"dn\": \"uni/infra\"\r\n\t\t},\r\n\t\t\"children\": [\r\n\t\t\t{\r\n\t\t\t\t\"infraSetPol\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/settings\",\r\n\t\t\t\t\t\t\"domainValidation\": \"true\",\r\n\t\t\t\t\t\t\"enforceSubnetCheck\": \"true\",\r\n\t\t\t\t\t\t\"unicastXrEpLearnDisable\": \"false\",\r\n                        \"reallocateGipo\":\"true\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"epControlP\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/epCtrlP-default\",\r\n\t\t\t\t\t\t\"adminSt\": \"enabled\",\r\n\t\t\t\t\t\t\"rogueEpDetectIntvl\": \"30\",\r\n\t\t\t\t\t\t\"rogueEpDetectMult\": \"6\",\r\n\t\t\t\t\t\t\"rn\": \"epCtrlP-default\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"epIpAgingP\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/ipAgingP-default\",\r\n\t\t\t\t\t\t\"rn\": \"ipAgingP-default\",\r\n\t\t\t\t\t\t\"adminSt\": \"enabled\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"epLoopProtectP\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/epLoopProtectP-default\",\r\n\t\t\t\t\t\t\"adminSt\": \"enabled\",\r\n\t\t\t\t\t\t\"action\": \"\",\r\n\t\t\t\t\t\t\"rn\": \"epLoopProtectP-default\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"infraPortTrackPol\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/trackEqptFabP-default\",\r\n\t\t\t\t\t\t\"adminSt\": \"on\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"mcpInstPol\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/mcpInstP-default\",\r\n\t\t\t\t\t\t\"descr\": \"MCP\",\r\n\t\t\t\t\t\t\"ctrl\": \"pdu-per-vlan\",\r\n\t\t\t\t\t\t\"adminSt\": \"enabled\",\r\n\t\t\t\t\t\t\"key\": \"nomoreloops\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"qosInstPol\": {\r\n\t\t\t\t\t\"attributes\": {\r\n\t\t\t\t\t\t\"dn\": \"uni/infra/qosinst-default\",\r\n\t\t\t\t\t\t\"ctrl\": \"dot1p-preserve\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"children\": []\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/infra.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"infra.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OOB - IP assignment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mgmtRsOoBStNode\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/tn-mgmt/mgmtp-default/oob-default/rsooBStNode-[topology/pod-1/node-{{OOB_NODE_ID}}]\",\r\n            \"addr\": \"{{OOB_NODE_IP}}\",\r\n            \"gw\": \"{{OOB_GW}}\",\r\n            \"tDn\": \"topology/pod-/node-{{OOB_NODE_ID}}\",\r\n            \"v6Addr\": \"::\",\r\n            \"v6Gw\": \"::\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/connectivityPrefs.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"connectivityPrefs.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OOB MGMT - default",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"mgmtConnectivityPrefs\": {\r\n\t\t\"attributes\": {\r\n\t\t\t\"dn\": \"uni/fabric/connectivityPrefs\",\r\n\t\t\t\"interfacePref\": \"ooband\"\r\n\t\t},\r\n\t\t\"children\": []\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/connectivityPrefs.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"connectivityPrefs.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SNMP Admin - default policy !Edit here!",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snmpPol\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/snmppol-default\",\r\n            \"adminSt\": \"enabled\",\r\n            \"contact\": \"netadmin@example.com\",\r\n            \"loc\": \"Deep in the DC\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/snmppol-default.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"snmppol-default.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SNMP v2 creds - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snmpCommunityP\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/snmppol-default/community-{{SNMPv2COM}}\",\r\n            \"name\": \"{{SNMPv2COM}}\",\r\n            \"status\": \"created\",\r\n            \"rn\": \"community-{{SNMPv2COM}}\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/snmppol-default/community-{{SNMPv2COM}}.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"snmppol-default",
+								"community-{{SNMPv2COM}}.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SNMP traps - default policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snmpTrapFwdServerP\": {\r\n        \"attributes\": {\r\n            \"dn\": \"uni/fabric/snmppol-default/trapfwdserver-[{{SNMPTRAP}}]\",\r\n            \"addr\": \"{{SNMPTRAP}}\",\r\n            \"status\": \"created\",\r\n            \"rn\": \"trapfwdserver-[{{SNMPTRAP}}]\"\r\n        },\r\n        \"children\": []\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/uni/fabric/snmppol-default/trapfwdserver-[{{SNMPTRAP}}].json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"uni",
+								"fabric",
+								"snmppol-default",
+								"trapfwdserver-[{{SNMPTRAP}}].json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APIC Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"for(var i=0; i<jsonData.imdata.length; i++)\r",
+							"{\r",
+							"pm.environment.set(\"token\", jsonData.imdata[i].aaaLogin.attributes.token);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"aaaUser\" : { \"attributes\": {\"name\":\"{{APICusername}}\",\"pwd\":\"{{APICpassword}}\" } } } ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/aaaLogin.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"aaaLogin.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "APIC - WEB token extend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"pkiWebTokenData\": {\r\n\t\t\"attributes\": {\r\n\t\t\t\"dn\": \"uni/userext/pkiext/webtokendata\",\r\n\t\t\t\"uiIdleTimeoutSeconds\": \"1800\"\r\n            \"webtokenTimeoutSeconds\": \"3600\"\r\n\t\t},\r\n\t\t\"children\": []\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/userext/pkiext/webtokendata.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"userext",
+						"pkiext",
+						"webtokendata.json"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"postman.setNextRequest(null);"
+				]
+			}
+		}
+	]
+}
