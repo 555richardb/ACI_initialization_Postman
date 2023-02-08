@@ -34,3 +34,20 @@ Initializing the ACI fabric through postman
 - SNMP v2 communities
 - SNMP traps
 
+# Postman Variables
+|Variable | Description | Note
+|---------|-------------|-------|
+|{{apic}} |Hostname/IP of the APIC | Environmental variable|
+|{{token}} | token from the apic login |Environmental variable|
+|{{APICusername}}|Username|Environmental variable|
+|{{APICpassword}}|Password|Environmental variable|
+|{{NODE_SN}}|Node serial number||
+|{{NODE_ID}}|Assigned Node ID||
+|{{NODE_NAME}}|Hostname of the device||
+|{{NODE_ROLE}}|Node role (spine/leaf)||
+|{{VPC_PROT_GROUP}}|VPC protection group Name||
+|{{LEAF_NODE_ID}}|VPC node ID||
+|{{LEAF_NODE_1}}|VPC member 1 Leaf ID||
+|{{LEAF_NODE_2}}|VPC member 2 Leaf ID||
+|{{LIP_NAME}}|Leaf Interface Profile name||
+TBC...
